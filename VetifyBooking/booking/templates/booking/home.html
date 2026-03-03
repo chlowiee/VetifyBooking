@@ -1,136 +1,173 @@
+
 {% extends 'booking/base.html' %}
 {% load static %}
 
-
-{% block title %}Home - Vetify Booking{% endblock %}
+{% block title %}Inicio - Vetify Booking{% endblock %}
 
 {% block content %}
-<div class="home-page">
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span>❤️</span>
-                        <span>Caring for your pets since 2010</span>
-                    </div>
-                    <h1 class="hero-title">Your Pet's Health is Our Priority 🐾</h1>
-                    <p class="hero-text">
-                        Book an appointment today and give your furry friend the care they deserve. 
-                        Our experienced veterinarians are ready to help with a smile!
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="{% url 'booking' %}" class="btn btn-primary btn-lg">Book Appointment</a>
-                        <a href="{% url 'appointments' %}" class="btn btn-secondary btn-lg">View My Appointments</a>
-                    </div>
-                    <div class="hero-info">
-                        <span>🕐</span>
-                        <span>Monday - Saturday: 9:00 AM - 5:00 PM</span>
-                    </div>
-                </div>
-                
-                <div class="hero-image">
-                    <img src="{% static 'images/perrohome.png' %}" alt="PerroHome">
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <!-- Texto del Hero -->
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Cuidado Veterinario de 
+                    <span class="highlight">Primera Clase</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Reserva citas fácilmente, gestiona el historial de tus mascotas y accede a servicios veterinarios profesionales. Tu mascota merece lo mejor.
+                </p>
+                <div class="hero-buttons">
+                    <a href="{% url 'booking' %}" class="hero-btn hero-btn-primary">
+                        <span>📅</span>
+                        <span>Reservar Cita</span>
+                    </a>
+                    <a href="#features" class="hero-btn hero-btn-secondary">
+                        <span>💉</span>
+                        <span>Ver Servicios</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose Vetify Booking?</h2>
-                <p>We're not just a vet clinic - we're a family that cares about your pets as much as you do!</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon red">❤️</div>
-                    <h3>Compassionate Care</h3>
-                    <p>We treat every pet like family, with gentle hands and warm hearts. Your pet's comfort is our priority!</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon blue">🏆</div>
-                    <h3>Expert Veterinarians</h3>
-                    <p>Over 15 years of experience and countless happy tails! Our team stays updated with the latest in pet care.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon green">🛡️</div>
-                    <h3>State-of-the-Art Facility</h3>
-                    <p>Modern equipment and comfortable spaces ensure your pet gets the best possible care in a stress-free environment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>Happy Pet Parents 😊</h2>
-                <p>See what our community has to say!</p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        "The staff is amazing! They made my nervous rescue dog feel so comfortable. Best vet experience ever! 🐕"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👨</div>
+            <!-- Ilustración del Hero -->
+            <div class="hero-illustration">
+                <div class="hero-image-container">
+                    <!-- IMAGEN  -->
+                    <img src="{% static 'images/perrohome.png' %}" alt="Perro Home" class="hero-image">
+                    
+                    <!-- Badges flotantes -->
+                    <div class="hero-badge hero-badge-1">
+                        <span class="hero-badge-icon">⭐</span>
                         <div>
-                            <p class="author-name">John M.</p>
-                            <p class="author-role">Dog parent</p>
+                            <div class="hero-badge-value">4.9/5</div>
+                            <div class="hero-badge-text">Calificación</div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        "Quick appointments, friendly service, and my cat actually didn't hate it! That's saying something! 😹"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👩</div>
+                    
+                    <div class="hero-badge hero-badge-2">
+                        <span class="hero-badge-icon">🐾</span>
                         <div>
-                            <p class="author-name">Sarah K.</p>
-                            <p class="author-role">Cat mom</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">
-                        "They saved my rabbit's life and were so caring throughout. Forever grateful! 🐰💕"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👨</div>
-                        <div>
-                            <p class="author-name">Mike R.</p>
-                            <p class="author-role">Bunny dad</p>
+                            <div class="hero-badge-value">2,500+</div>
+                            <div class="hero-badge-text">Mascotas Felices</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <div class="cta-icon">🐾</div>
-                <h2>Ready to Give Your Pet the Best Care?</h2>
-                <p>Join hundreds of happy pet parents who trust us with their furry family members!</p>
-                <a href="{% url 'booking' %}" class="btn btn-white btn-lg">Book Your First Appointment</a>
+<!-- FEATURES SECTION -->
+<section id="features" class="features">
+    <div class="features-container">
+        <div class="features-header">
+            <h2 class="features-title">¿Por qué elegir Vetify?</h2>
+            <p class="features-subtitle">
+                Ofrecemos servicios veterinarios integrales con tecnología moderna para el cuidado de tus mascotas
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Reservas Fáciles</h3>
+                <p class="feature-description">
+                    Sistema de reservas en línea 24/7. Elige fecha, hora y veterinario en segundos.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">👨‍⚕️</div>
+                <h3 class="feature-title">Veterinarios Expertos</h3>
+                <p class="feature-description">
+                    Equipo profesional certificado con años de experiencia en el cuidado animal.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3 class="feature-title">Historial Digital</h3>
+                <p class="feature-description">
+                    Accede al historial médico completo de tus mascotas desde cualquier lugar.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">💉</div>
+                <h3 class="feature-title">Servicios Completos</h3>
+                <p class="feature-description">
+                    Consultas, vacunación, cirugía, emergencias y más servicios especializados.
+                </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3 class="feature-title">Recordatorios</h3>
+                <p class="feature-description">
+                    Notificaciones automáticas para vacunas, citas y controles médicos.
+                </p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3 class="feature-title">Atención Personalizada</h3>
+                <p class="feature-description">
+                    Tratamos a cada mascota como si fuera nuestra, con amor y dedicación.
+                </p>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats">
+    <div class="stats-container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">🐾</div>
+                <div class="stat-value">2,500+</div>
+                <div class="stat-label">Mascotas Atendidas</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">👨‍⚕️</div>
+                <div class="stat-value">15</div>
+                <div class="stat-label">Veterinarios Expertos</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value">4.9/5</div>
+                <div class="stat-label">Calificación Promedio</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">📅</div>
+                <div class="stat-value">10,000+</div>
+                <div class="stat-label">Citas Completadas</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta">
+    <div class="cta-container">
+        <h2 class="cta-title">¿Listo para cuidar a tu mascota?</h2>
+        <p class="cta-text">
+            Únete a miles de dueños satisfechos que confían en Vetify para el cuidado de sus mascotas. Agenda tu primera cita hoy mismo.
+        </p>
+        <a href="{% url 'booking' %}" class="cta-button">
+            <span>📅</span>
+            <span>Reservar Ahora</span>
+        </a>
+    </div>
+</section>
 {% endblock %}

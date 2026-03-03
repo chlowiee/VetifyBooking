@@ -1,0 +1,228 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block title %}Servicios y Horarios - Vetify Booking{% endblock %}
+
+{% block content %}
+<!-- HEADER DE LA PÁGINA -->
+<section class="page-header">
+    <div class="container">
+        <div class="page-header-content">
+            <h1 class="page-header-title">
+                <span class="page-header-icon">💉</span>
+                Servicios y Horarios
+            </h1>
+            <p class="page-header-subtitle">
+                Conoce todos nuestros servicios veterinarios disponibles y horarios de atención
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DE HORARIOS GENERALES -->
+<section class="schedules-section">
+    <div class="container">
+        <div class="schedules-header">
+            <h2 class="section-title">
+                <span>🕐</span>
+                Horarios de Atención
+            </h2>
+            <p class="section-subtitle">Estamos disponibles para cuidar de tus mascotas</p>
+        </div>
+
+        <div class="schedules-grid">
+            {% for schedule in schedules %}
+            <div class="schedule-card {% if schedule.is_today %}schedule-card-today{% endif %}">
+                <div class="schedule-day">
+                    <span class="schedule-day-icon">📅</span>
+                    <span class="schedule-day-name">{{ schedule.day_display }}</span>
+                    {% if schedule.is_today %}
+                    <span class="schedule-badge-today">HOY</span>
+                    {% endif %}
+                </div>
+                
+                {% if schedule.is_open %}
+                <div class="schedule-times">
+                    <div class="schedule-time">
+                        <span class="schedule-time-icon">🌅</span>
+                        <div>
+                            <div class="schedule-time-label">Apertura</div>
+                            <div class="schedule-time-value">{{ schedule.start_time|time:"g:i A" }}</div>
+                        </div>
+                    </div>
+                    <div class="schedule-time">
+                        <span class="schedule-time-icon">🌙</span>
+                        <div>
+                            <div class="schedule-time-label">Cierre</div>
+                            <div class="schedule-time-value">{{ schedule.end_time|time:"g:i A" }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="schedule-status schedule-status-open">
+                    <span>✅</span>
+                    <span>Abierto</span>
+                </div>
+                {% else %}
+                <div class="schedule-closed">
+                    <span class="schedule-closed-icon">🔒</span>
+                    <span class="schedule-closed-text">Cerrado</span>
+                </div>
+                <div class="schedule-status schedule-status-closed">
+                    <span>❌</span>
+                    <span>No disponible</span>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <span class="empty-state-icon">📅</span>
+                <p class="empty-state-text">No hay horarios configurados</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DE SERVICIOS -->
+<section class="services-section">
+    <div class="container">
+        <div class="services-header">
+            <h2 class="section-title">
+                <span>🏥</span>
+                Nuestros Servicios
+            </h2>
+            <p class="section-subtitle">Servicios veterinarios profesionales para el cuidado integral de tus mascotas</p>
+        </div>
+
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">{{ service.icon }}</div>
+                    <div class="service-info">
+                        <h3 class="service-name">{{ service.name }}</h3>
+                        <div class="service-duration">
+                            <span>⏱️</span>
+                            <span>{{ service.duration }} minutos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="service-description">{{ service.description }}</p>
+                
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="service-price-label">Precio:</span>
+                        <span class="service-price-value">${{ service.price }}</span>
+                    </div>
+                    <a href="{% url 'booking' %}?service={{ service.id }}" class="service-btn">
+                        <span>📅</span>
+                        <span>Reservar</span>
+                    </a>
+                </div>
+                
+                {% if service.is_active %}
+                <div class="service-badge service-badge-active">✅ Disponible</div>
+                {% else %}
+                <div class="service-badge service-badge-inactive">⏸️ No disponible</div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <span class="empty-state-icon">🏥</span>
+                <p class="empty-state-text">No hay servicios disponibles en este momento</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DE VETERINARIOS DISPONIBLES -->
+<section class="vets-section">
+    <div class="container">
+        <div class="vets-header">
+            <h2 class="section-title">
+                <span>👨‍⚕️</span>
+                Nuestros Veterinarios
+            </h2>
+            <p class="section-subtitle">Equipo profesional dedicado al cuidado de tus mascotas</p>
+        </div>
+
+        <div class="vets-grid">
+            {% for vet in veterinarians %}
+            <div class="vet-card">
+                <div class="vet-avatar">
+                    {% if vet.profile_image %}
+                    <img src="{{ vet.profile_image.url }}" alt="{{ vet.get_full_name }}">
+                    {% else %}
+                    <div class="vet-avatar-placeholder">
+                        <span>👨‍⚕️</span>
+                    </div>
+                    {% endif %}
+                    {% if vet.is_available_today %}
+                    <span class="vet-status-badge vet-status-available">🟢</span>
+                    {% else %}
+                    <span class="vet-status-badge vet-status-unavailable">🔴</span>
+                    {% endif %}
+                </div>
+                
+                <div class="vet-info">
+                    <h3 class="vet-name">{{ vet.get_full_name }}</h3>
+                    <p class="vet-specialty">{{ vet.specialty|default:"Medicina Veterinaria General" }}</p>
+                    
+                    <div class="vet-stats">
+                        <div class="vet-stat">
+                            <span class="vet-stat-icon">⭐</span>
+                            <span class="vet-stat-value">{{ vet.rating|default:"5.0" }}</span>
+                        </div>
+                        <div class="vet-stat">
+                            <span class="vet-stat-icon">📅</span>
+                            <span class="vet-stat-value">{{ vet.total_appointments|default:"0" }} citas</span>
+                        </div>
+                    </div>
+                    
+                    {% if vet.is_available_today %}
+                    <div class="vet-availability">
+                        <span>✅</span>
+                        <span>Disponible hoy</span>
+                    </div>
+                    {% else %}
+                    <div class="vet-availability vet-availability-unavailable">
+                        <span>⏸️</span>
+                        <span>No disponible hoy</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <span class="empty-state-icon">👨‍⚕️</span>
+                <p class="empty-state-text">No hay veterinarios disponibles</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DE CTA -->
+<section class="cta-schedules">
+    <div class="container">
+        <div class="cta-schedules-content">
+            <h2 class="cta-schedules-title">¿Listo para agendar tu cita?</h2>
+            <p class="cta-schedules-text">
+                Nuestro equipo está esperando para brindarle a tu mascota el mejor cuidado veterinario
+            </p>
+            <div class="cta-schedules-buttons">
+                <a href="{% url 'booking' %}" class="cta-schedules-btn cta-schedules-btn-primary">
+                    <span>📅</span>
+                    <span>Reservar Cita Ahora</span>
+                </a>
+                <a href="{% url 'appointments' %}" class="cta-schedules-btn cta-schedules-btn-secondary">
+                    <span>📋</span>
+                    <span>Ver Mis Citas</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

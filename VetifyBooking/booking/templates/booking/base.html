@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Vetify Booking{% endblock %}</title>
-    
+
     <!-- CSS Principal -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+
+    <!--Calendario-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <!-- CSS Adicional de cada página -->
     {% block extra_css %}{% endblock %}
 </head>
@@ -33,7 +35,7 @@
                         <span>Inicio</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:schedules' %}" class="nav-link">
+                    <a href="{% url 'services_schedules' %}" class="nav-link">
                         <span>🕐</span>
                         <span>Horarios</span>
                     </a>
@@ -131,7 +133,23 @@
         </div>
     </footer>
     {% endif %}
-    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+    flatpickr("#id_date", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        disableMobile: true,
+    });
+
+    flatpickr("#id_time", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+    });
+    </script>
+
     <!-- JavaScript adicional de cada página -->
     {% block extra_js %}{% endblock %}
 </body>

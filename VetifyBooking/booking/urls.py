@@ -16,5 +16,7 @@ urlpatterns = [
     path('edit-pet/<int:pet_id>/', views.edit_pet_view, name='edit_pet'),
     path('delete-pet/<int:pet_id>/', views.delete_pet_view, name='delete_pet'),
     path('documents/', views.documents_view, name='documents'),
+    
+    path('services-schedules/', views.services_schedules_view, name='services_schedules'),
 ]
 
