@@ -446,4 +446,7 @@ def delete_pet(request, pet_id):
     
     return render(request, 'booking/confirm_delete_pet.html', context)
 
+from django.shortcuts import render
 
+def error_404(request, exception):
+    return render(request, "booking/404.html", status=404)

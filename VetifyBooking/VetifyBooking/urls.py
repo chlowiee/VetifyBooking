@@ -28,3 +28,8 @@ urlpatterns = [
 # Servir archivos media en desarrollo
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+from django.conf.urls import handler404
+from booking import views
+
+handler404 = 'booking.views.error_404'
