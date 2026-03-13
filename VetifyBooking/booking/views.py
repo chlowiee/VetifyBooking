@@ -407,10 +407,17 @@ from django.contrib.auth.decorators import login_required
 from .models import Pet
 
 
+
+from django.urls import resolve, reverse, NoReverseMatch
+
 @login_required
 def edit_pet(request, pet_id):
-
     pet = get_object_or_404(Pet, id=pet_id, owner=request.user)
+    
+    next_url = request.GET.get('next') or request.POST.get('next')
+
+    if not next_url:
+        next_url = reverse('profile')
 
     if request.method == "POST":
         pet.name = request.POST.get("name")
@@ -419,21 +426,18 @@ def edit_pet(request, pet_id):
         pet.age = request.POST.get("age")
         pet.weight = request.POST.get("weight")
         pet.notes = request.POST.get("notes")
-
         pet.save()
+        return redirect(next_url)
 
-        return redirect("profile")
-
-    return render(request, "booking/register_pet.html", {"pet": pet})
+    return render(request, "booking/register_pet.html", {
+        "pet": pet,
+        "next": next_url
+    })
 
 
 @login_required
 def delete_pet(request, pet_id):
-    """
-    Vista para eliminar una mascota
-    """
     pet = get_object_or_404(Pet, id=pet_id, owner=request.user)
-    
     if request.method == 'POST':
         pet_name = pet.name
         pet.delete()

@@ -44,7 +44,7 @@
                 <div class="sidebar-nav-section">
                     <div class="sidebar-nav-title">Principal</div>
 
-                    <a href="{% url 'admin_dashboard:dashboard' %}" 
+                    <a href="{% url 'admin_dashboard:dashboard' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-speedometer2"></i>
@@ -52,7 +52,7 @@
                         <span class="sidebar-link-text">Dashboard</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:reports' %}" 
+                    <a href="{% url 'admin_dashboard:reports' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'reports' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-graph-up"></i>
@@ -65,7 +65,7 @@
                 <div class="sidebar-nav-section">
                     <div class="sidebar-nav-title">Gestión</div>
 
-                    <a href="{% url 'admin_dashboard:appointments' %}" 
+                    <a href="{% url 'admin_dashboard:appointments' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'appointments' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-calendar-check"></i>
@@ -73,7 +73,7 @@
                         <span class="sidebar-link-text">Citas</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:users' %}" 
+                    <a href="{% url 'admin_dashboard:users' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'users' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-people"></i>
@@ -81,7 +81,7 @@
                         <span class="sidebar-link-text">Usuarios</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:pets' %}" 
+                    <a href="{% url 'admin_dashboard:pets' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'pets' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-heart"></i>
@@ -89,7 +89,7 @@
                         <span class="sidebar-link-text">Mascotas</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:veterinarians' %}" 
+                    <a href="{% url 'admin_dashboard:veterinarians' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'veterinarians' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-person-badge"></i>
@@ -102,7 +102,7 @@
                 <div class="sidebar-nav-section">
                     <div class="sidebar-nav-title">Configuración</div>
 
-                    <a href="{% url 'admin_dashboard:services' %}" 
+                    <a href="{% url 'admin_dashboard:services' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-capsule"></i>
@@ -110,7 +110,7 @@
                         <span class="sidebar-link-text">Servicios</span>
                     </a>
 
-                    <a href="{% url 'admin_dashboard:schedules' %}" 
+                    <a href="{% url 'admin_dashboard:schedules' %}"
                        class="sidebar-link {% if request.resolver_match.url_name == 'schedules' %}active{% endif %}">
                         <span class="sidebar-link-icon">
                             <i class="bi bi-clock"></i>

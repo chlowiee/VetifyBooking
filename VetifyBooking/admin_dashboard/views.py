@@ -489,3 +489,20 @@ def toggle_document_status_view(request, document_id):
         messages.error(request, f'Error al cambiar el estado: {str(e)}')
     
     return redirect('admin_dashboard:upload_document')
+
+@admin_required
+def add_veterinarian(request):
+    if request.method == 'POST':
+        Veterinarian.objects.create(
+            name=request.POST.get('name'),
+            email=request.POST.get('email'),
+            phone=request.POST.get('phone', ''),
+            license_number=request.POST.get('license_number'),
+            specialty=request.POST.get('specialty'),
+            years_experience=request.POST.get('years_experience', 0),
+            start_time=request.POST.get('start_time', '08:00'),
+            end_time=request.POST.get('end_time', '17:00'),
+            is_active=True
+        )
+        messages.success(request, 'Veterinario agregado exitosamente.')
+    return redirect('admin_dashboard:veterinarians')

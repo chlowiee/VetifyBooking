@@ -395,6 +395,9 @@
         <div class="form-grid">
             <!-- Left Column: Form -->
             <div>
+                <input type="hidden" name="next" value="{{ next }}">
+
+
                 <div class="card">
                     <!-- Section 1: Basic Info -->
                     <div class="form-section">
@@ -609,7 +612,7 @@
 
                     <!-- Action Buttons -->
                     <div class="btn-group">
-                        <a href="{% url 'profile' %}" class="btn btn-outline">Cancelar</a>
+                        <a href="{{ next }}" class="btn btn-outline">Cancelar</a>
                         <button type="submit" class="btn btn-primary">{{ button_text|default:"Registrar Mascota" }}</button>
                     </div>
                 </div>

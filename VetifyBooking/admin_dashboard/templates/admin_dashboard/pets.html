@@ -375,50 +375,38 @@
                 <div class="pet-card">
 
                     <div class="pet-header">
-
                         <div class="pet-avatar">
                             {{ pet.get_emoji }}
                         </div>
-
                         <div class="pet-info">
-
                             <h3>{{ pet.name }}</h3>
-
                             <p class="pet-owner">
                                 <i class="bi bi-person"></i>
                                 {{ pet.owner.username }}
                             </p>
-
                             <span class="badge badge-{{ pet.pet_type }}">
                                 {{ pet.get_pet_type_display }}
                             </span>
-
                         </div>
-
                     </div>
 
                     <div class="pet-details">
-
                         <div class="detail-item">
                             <strong>Edad:</strong>
                             {{ pet.age }} año{{ pet.age|pluralize }}
                         </div>
-
                         <div class="detail-item">
                             <strong>Peso:</strong>
                             {{ pet.weight }} kg
                         </div>
-
                         {% if pet.breed %}
-                            <div class="detail-item">
-                                <strong>Raza:</strong>
-                                {{ pet.breed }}
-                            </div>
+                        <div class="detail-item">
+                            <strong>Raza:</strong>
+                            {{ pet.breed }}
+                        </div>
                         {% endif %}
-
                         <div class="detail-item">
                             <strong>Vacunas:</strong>
-
                             {% if pet.vaccination_status == 'updated' %}
                                 Al día
                             {% elif pet.vaccination_status == 'pending' %}
@@ -426,21 +414,18 @@
                             {% else %}
                                 Sin vacunas
                             {% endif %}
-
                         </div>
-
                     </div>
 
                     <div class="pet-actions">
-
-                        <a
-                            href="{% url 'admin_dashboard:delete_pet' pet.id %}"
-                            class="action-btn btn-delete"
-                            onclick="return confirm('¿Eliminar a {{ pet.name }}?')"
-                        >
+                        <a href="{% url 'edit_pet' pet.id %}?next={% url 'admin_dashboard:pets' %}" 
+                            class="action-btn" style="background:#dbeafe; color:#1e40af;">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a href="{% url 'admin_dashboard:delete_pet' pet.id %}" class="action-btn btn-delete"
+                        onclick="return confirm('¿Eliminar a {{ pet.name }}?')">
                             <i class="bi bi-trash"></i> Eliminar
                         </a>
-
                     </div>
 
                 </div>

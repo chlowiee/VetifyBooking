@@ -266,15 +266,18 @@
 
     <div class="table-container">
         <div class="table-header">
-            <div>
-                <h2 class="table-title">
-                    <i class="bi bi-person-badge"></i> Listado de Veterinarios
-                </h2>
-                <p class="table-count">
-                    {{ total_count }} veterinario{{ total_count|pluralize }} - {{ active_count }} activo{{ active_count|pluralize }}
-                </p>
-            </div>
+        <div>
+            <h2 class="table-title">
+                <i class="bi bi-person-badge"></i> Listado de Veterinarios
+            </h2>
+            <p class="table-count">
+                {{ total_count }} veterinario{{ total_count|pluralize }} - {{ active_count }} activo{{ active_count|pluralize }}
+            </p>
         </div>
+        <button onclick="document.getElementById('modalAgregarVet').style.display='flex'" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Agregar Veterinario
+        </button>
+    </div>
 
         {% if veterinarians %}
             <div class="vets-grid">
@@ -326,5 +329,83 @@
                 <p>No se encontraron veterinarios con los filtros seleccionados</p>
             </div>
         {% endif %}
+    </div>
+    <!-- Modal Agregar Veterinario -->
+    <div id="modalAgregarVet" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:1rem; padding:2rem; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; margin:1rem;">
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h2 style="font-size:1.25rem; font-weight:700; color:#0f172a;">
+                    <i class="bi bi-person-plus"></i> Agregar Veterinario
+                </h2>
+                <button onclick="document.getElementById('modalAgregarVet').style.display='none'" 
+                        style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#6b7280;">✕</button>
+            </div>
+
+            <form method="POST" action="{% url 'admin_dashboard:add_veterinarian' %}">
+                {% csrf_token %}
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Nombre completo *</label>
+                        <input type="text" name="name" class="filter-input" required placeholder="Dr. Juan García">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Email *</label>
+                        <input type="email" name="email" class="filter-input" required placeholder="doctor@vetify.com">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Teléfono</label>
+                        <input type="text" name="phone" class="filter-input" placeholder="+52 555 000 0000">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Cédula profesional *</label>
+                        <input type="text" name="license_number" class="filter-input" required placeholder="CEP-12345">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Especialidad *</label>
+                        <select name="specialty" class="filter-input" required>
+                            <option value="general">Medicina General</option>
+                            <option value="surgery">Cirugía</option>
+                            <option value="dental">Odontología</option>
+                            <option value="dermatology">Dermatología</option>
+                            <option value="cardiology">Cardiología</option>
+                            <option value="emergency">Emergencias</option>
+                        </select>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Años de experiencia</label>
+                        <input type="number" name="years_experience" class="filter-input" min="0" placeholder="5">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Hora inicio</label>
+                        <input type="time" name="start_time" class="filter-input" value="08:00">
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label style="font-size:0.875rem; font-weight:600; color:#374151;">Hora fin</label>
+                        <input type="time" name="end_time" class="filter-input" value="17:00">
+                    </div>
+
+                </div>
+
+                <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+                    <button type="button" onclick="document.getElementById('modalAgregarVet').style.display='none'"
+                            class="btn" style="flex:1; background:white; border:2px solid #e5e7eb; color:#374151;">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex:1;">
+                        <i class="bi bi-plus-circle"></i> Agregar Veterinario
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
